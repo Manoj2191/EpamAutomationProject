@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="CalculatorTestSuite" parallel="methods" thread-count="10">
+    <groups>
+        <run>
+            <include name="smoke"/>
+        </run>
+    </groups>
+    <listeners>
+        <listener class-name="com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter"/>
+        <listener class-name="org.epam.testing.listeners.TestListener"/>
+    </listeners>
+    <test name="CalculatorTests">
+        <classes>
+            <class name="org.epam.testing.CalculatorTest"/>
+        </classes>
+    </test>
+</suite>

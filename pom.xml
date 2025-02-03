@@ -11,6 +11,8 @@
     <url>http://maven.apache.org</url>
 
     <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <testng-version>7.10.2</testng-version>
         <selenium-version>4.27.0</selenium-version>
@@ -18,13 +20,63 @@
         <lombok-version>1.18.36</lombok-version>
         <jackson-version>2.13.4.2</jackson-version>
         <assertj-version>3.27.2</assertj-version>
-        <cucumber-version>7.20.1</cucumber-version>
         <log4j-version>2.20.0</log4j-version>
+        <aeonbits-owner-version>1.0.4</aeonbits-owner-version>
+        <guice-version>7.0.0</guice-version>
+        <cucumber-version>7.20.1</cucumber-version>
+        <surefire-plugin-version>3.5.2</surefire-plugin-version>
+        <complier-plugin-version>3.12.0</complier-plugin-version>
+        <extent-report-version>1.2.2</extent-report-version>
+        <skipTest>false</skipTest>
+        <skip-test>${skipTest}</skip-test>
     </properties>
 
     <profiles>
         <profile>
+            <id>build-all-without-test</id>
+            <properties>
+                <skipTest>true</skipTest>
+            </properties>
+            <modules>
+                <module>core</module>
+                <module>app1-ui-tests</module>
+                <module>calculator-app-tests</module>
+            </modules>
+        </profile>
+        <profile>
             <id>run-all</id>
+            <modules>
+                <module>core</module>
+                <module>app1-ui-tests</module>
+                <module>calculator-app-tests</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>build-core</id>
+            <properties>
+                <skipTest>true</skipTest>
+            </properties>
+            <modules>
+                <module>core</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>run-app1-test</id>
+            <properties>
+                <skipTest>false</skipTest>
+            </properties>
+            <modules>
+                <module>app1-ui-tests</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>run-calc-app-test</id>
+            <properties>
+                <skipTest>false</skipTest>
+            </properties>
+            <modules>
+                <module>calculator-app-tests</module>
+            </modules>
         </profile>
     </profiles>
 
@@ -38,8 +90,7 @@
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.18.36</version>
-                <scope>${lombok-version}</scope>
+                <version>${lombok-version}</version>
             </dependency>
             <dependency>
                 <groupId>org.testng</groupId>
@@ -77,8 +128,60 @@
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>
-                <version>${lombok-version}</version>
+                <version>${log4j-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aeonbits.owner</groupId>
+                <artifactId>owner</artifactId>
+                <version>${aeonbits-owner-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.inject</groupId>
+                <artifactId>guice</artifactId>
+                <version>${guice-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-guice</artifactId>
+                <version>${cucumber-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-junit</artifactId>
+                <version>${cucumber-version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-testng</artifactId>
+                <version>${cucumber-version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.aventstack</groupId>
+                <artifactId>extentreports-testng-adapter</artifactId>
+                <version>${extent-report-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${complier-plugin-version}</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire-plugin-version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
