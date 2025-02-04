@@ -7,7 +7,6 @@
         </run>
     </groups>
     <listeners>
-        <listener class-name="com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter"/>
         <listener class-name="org.epam.testing.listeners.TestListener"/>
     </listeners>
     <test name="CalculatorTests">

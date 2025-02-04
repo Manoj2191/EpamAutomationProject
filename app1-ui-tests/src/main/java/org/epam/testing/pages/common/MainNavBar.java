@@ -2,6 +2,7 @@ package org.epam.testing.pages.common;
 
 import com.google.inject.Inject;
 import org.epam.testing.pages.abstracts.AbstractBlock;
+import org.epam.testing.pages.factory.PageFactory;
 import org.epam.testing.pages.results.ResultPage;
 import org.epam.testing.uicore.seleniumutils.DriverUtilities;
 import org.openqa.selenium.By;
@@ -17,7 +18,6 @@ public class MainNavBar extends AbstractBlock {
     private final By MAIN_NAV_BAR_LOCATOR = By.xpath("//form[contains(@class, \"header-form-search\")]");
     private final By SEARCH_INPUT_LOCATOR = By.xpath("//input[@title=\"Search for Products, Brands and More\"]");
     private final By SEARCH_BUTTON_LOCATOR = By.xpath("//button[@title=\"Search for Products, Brands and More\"]");
-    private final By RESULT_DROP_DOWN_LOCATOR = By.xpath("//form[@action='/search']");
     private final By RESULT_DROP_DOWN_RESULT_NAME_LOCATOR = By.xpath("//form[@action='/search']//a/div[text()]");
 
     @Inject
@@ -34,17 +34,17 @@ public class MainNavBar extends AbstractBlock {
         typeTextInSearchInput(productName);
         clickSearchButton();
 
-        return new ResultPage(webDriver);
+        return PageFactory.createPage(ResultPage.class, webDriver);
     }
 
-    public ResultPage typeTextInSearchInput(String text) {
+    public MainNavBar typeTextInSearchInput(String text) {
         DriverUtilities.typeText(text, SEARCH_INPUT_LOCATOR, webDriver);
-        return new ResultPage(webDriver);
+        return this;
     }
 
     public ResultPage clickSearchButton() {
         DriverUtilities.click(SEARCH_BUTTON_LOCATOR, webDriver);
-        return new ResultPage(webDriver);
+        return PageFactory.createPage(ResultPage.class, webDriver);
     }
 
     public List<String> getResultsFromDropdown() {

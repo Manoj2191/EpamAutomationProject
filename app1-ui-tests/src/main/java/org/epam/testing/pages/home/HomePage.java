@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import org.epam.testing.config.TestRunConfig;
 import org.epam.testing.pages.abstracts.AbstractPage;
 import org.epam.testing.pages.common.MainNavBar;
+import org.epam.testing.pages.factory.BlockFactory;
 import org.epam.testing.uicore.seleniumutils.DriverUtilities;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -39,6 +40,6 @@ public class HomePage extends AbstractPage {
     }
 
     public MainNavBar onMainNavigationBar() {
-        return new MainNavBar(webDriver);
+        return BlockFactory.createBlock(MainNavBar.class, webDriver);
     }
 }
