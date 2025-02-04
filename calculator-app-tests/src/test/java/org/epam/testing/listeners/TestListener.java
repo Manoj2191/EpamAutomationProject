@@ -20,7 +20,6 @@ public class TestListener implements ITestListener {
         File moduleDir = new File(System.getProperty("user.dir"));
         String reportPath = Paths.get(moduleDir.getAbsolutePath(), "target", "report/extent-report.html").toString();
 
-        System.out.println(">>>>>>>>>>>>>>>"+reportPath);
         ExtentSparkReporter htmlReporter = new ExtentSparkReporter(reportPath);
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
@@ -28,7 +27,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        test = extent.createTest(result.getMethod().getMethodName());
+        test = extent.createTest(result.getMethod().getDescription());
     }
 
     @Override

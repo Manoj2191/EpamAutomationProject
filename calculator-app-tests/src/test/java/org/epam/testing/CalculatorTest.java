@@ -65,17 +65,17 @@ public class CalculatorTest {
     }
 
     //Bug
-    @Test(description = "Square root of negative numbers")
+    @Test(description = "Square root of negative numbers test")
     public void test8() {
         Assertions.assertThat(Double.isNaN(calculator.sqrt(-25L))).isTrue();
     }
 
-    @Test(description = "Subtraction of 2 negative numbers")
+    @Test(description = "Subtraction of 2 negative numbers test")
     public void test9() {
         Assertions.assertThat(calculator.sub(-20L, -20L)).isEqualTo(0L);
     }
 
-    @Test(description = "Power of 0")
+    @Test(description = "Power of 0 test")
     public void test10() {
         Assertions.assertThat(calculator.pow(0, 2)).isEqualTo(0); // Bug due to Math.floor
     }
